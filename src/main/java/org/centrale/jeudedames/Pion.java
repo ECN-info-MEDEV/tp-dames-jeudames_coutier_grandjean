@@ -13,4 +13,9 @@ public class Pion {
     // attributs
     private boolean dame;
     private boolean couleur; // true = blanc et false = noir
+    private Point2D position;
+    
+    //méthodes
+    
+    
 }
