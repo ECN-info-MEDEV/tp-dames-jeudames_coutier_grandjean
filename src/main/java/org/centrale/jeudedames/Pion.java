@@ -10,4 +10,7 @@ package org.centrale.jeudedames;
  */
 public class Pion {
     
+    // attributs
+    private boolean dame;
+    private boolean couleur; // true = blanc et false = noir
 }
