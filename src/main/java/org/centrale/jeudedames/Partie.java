@@ -17,20 +17,74 @@ public class Partie {
     private int tour;
     
     public Partie(){
+        tour = 0;
         listePion = new ArrayList<>();
-        for (int i=0;i<10;i++){
+        for (int i=0;i<20;i++){
             listePion.add(new Pion());
         }
-        for (int i=0;i<10;i++){
+        for (int i=0;i<20;i++){
             listePion.add(new Pion());
         }
     }
         
+    /**
+     * Renvoie true si un pion/Dame se trouve sur la case et l'affiche, sinon renvoie false
+     * @param i
+     * @param j
+     * @return
+     */
+    public boolean pionSurCase(int i, int j){
+        for (Pion pion : listePion){
+            if ( pion.getPosition().equals(new Point2D(i,j)) ){
+                if ( pion.isCouleur() ) { 
+                //Blanc
+                    if ( pion.isDame() ){ 
+                    //Dame
+                        System.out.print("☺");
+                    }else{ 
+                    //Pion
+                        System.out.print("○");
+                    }
+                }else{ 
+                //Noir
+                    if ( pion.isDame() ){ 
+                    //Dame
+                        System.out.print("☻");
+                    }else{ 
+                    //Pion
+                        System.out.print("◙");
+                    }
+                }
+                return true;
+            }
+        }
+        //Si aucun pion se trouve sur la case
+        return false;
+    }
     
-    public affichePlateau(){
-        
-        
-        System.out.println("○◙");
+    /**
+     * Affiche le plateau de taille 10x10
+     * Blanc : pion = ○ ; dame = ☺
+     * Noir  : pion = ◙ ; dame = ☻
+     * Case vide = •
+     */
+    public void affichePlateau(){
+        //Plateau de 10x10
+        // TODO voir si on choisit le premier indice à 1 ou à 0
+        for (int i = 0 ; i<10 ; i++){
+            for (int j = 0 ; j<10 ; j++){
+                if ( (i+j)%2 == 0){ 
+                //Les pions ne sont que sur les cases noires
+                    System.out.print("•");
+                }else{
+                    if (!pionSurCase(i,j)){
+                        System.out.print("•");
+                    }
+                }
+            }
+            //Changement de ligne
+            System.out.println("");
+        }
     }
     
 }
