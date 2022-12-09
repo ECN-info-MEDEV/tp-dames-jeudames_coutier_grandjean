@@ -15,7 +15,33 @@ public class Pion {
     private boolean couleur; // true = blanc et false = noir
     private Point2D position;
     
-    //méthodes
+    //Setters et Getters 
+
+    public boolean isDame() {
+        return dame;
+    }
+
+    public void setDame(boolean dame) {
+        this.dame = dame;
+    }
+
+    public boolean isCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(boolean couleur) {
+        this.couleur = couleur;
+    }
+
+    public Point2D getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
     
+        
+    //méthodes
     
 }
