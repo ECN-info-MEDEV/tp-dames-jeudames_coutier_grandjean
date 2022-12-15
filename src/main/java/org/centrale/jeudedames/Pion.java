@@ -38,6 +38,7 @@ public class Pion {
     public Pion(boolean couleur){
         this.couleur = couleur;
         this.dame = false;
+        this.position = new Point2D();
     }
     
     /**
@@ -87,7 +88,7 @@ public class Pion {
     public void promotion(){
         if (((this.couleur==true) && (this.getPosition().getY()==0)) || ((this.couleur==false) && (this.getPosition().getY()==9))){
             this.setDame(true);
-            System.out.println("Le pion en position ");
+            System.out.print("Le pion en position ");
             this.getPosition().affiche();
             System.out.println(" est promu en dame.");
         }
