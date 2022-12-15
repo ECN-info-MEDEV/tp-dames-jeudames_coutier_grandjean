@@ -43,10 +43,24 @@ public class Pion {
     
         
     //méthodes
+<<<<<<< HEAD
     public void deplace(){
         listeDeplacement =
         //on regarde toutes les positions possibles et
         
     }
     
+=======
+    /**
+     * vérifie qu'un pion peut être ou non promu et le promeut si c'est possible
+     */
+    public void promotion(){
+        if (((this.couleur==true) && (this.getPosition().getY()==0)) || ((this.couleur==false) && (this.getPosition().getY()==9))){
+            this.setDame(true);
+            System.out.println("Le pion en position ");
+            this.getPosition().affiche();
+            System.out.println(" est promu en dame.");
+        }
+    }
+>>>>>>> 08603a0fbf529ba5b9a1594c82827e38c84b6917
 }
