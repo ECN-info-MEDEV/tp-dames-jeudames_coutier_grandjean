@@ -43,6 +43,14 @@ public class Pion {
     
         
     //méthodes
+<<<<<<< HEAD
+    public void deplace(){
+        listeDeplacement =
+        //on regarde toutes les positions possibles et
+        
+    }
+    
+=======
     /**
      * vérifie qu'un pion peut être ou non promu et le promeut si c'est possible
      */
@@ -54,4 +62,5 @@ public class Pion {
             System.out.println(" est promu en dame.");
         }
     }
+>>>>>>> 08603a0fbf529ba5b9a1594c82827e38c84b6917
 }
