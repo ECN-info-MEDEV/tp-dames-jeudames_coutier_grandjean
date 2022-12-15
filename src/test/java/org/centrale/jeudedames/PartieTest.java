@@ -27,18 +27,6 @@ public class PartieTest {
     }
 
     /**
-     * Test of init method, of class Partie.
-     */
-    @Test
-    public void testInit() {
-        System.out.println("init");
-        Partie instance = new Partie();
-        instance.init();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of quelPion method, of class Partie.
      */
     @Test
@@ -46,13 +34,13 @@ public class PartieTest {
         System.out.println("quelPion");
         Partie instance = new Partie();
         Pion pion = new Pion(true,new Point2D(),false);
-        assertEquals("○", instance.quelPion(pion));
+        assertEquals("b", instance.quelPion(pion));
         pion.setDame(true);
-        assertEquals("☺", instance.quelPion(pion));
+        assertEquals("B", instance.quelPion(pion));
         pion.setCouleur(false);
-        assertEquals("☻", instance.quelPion(pion));
+        assertEquals("N", instance.quelPion(pion));
         pion.setDame(false);
-        assertEquals("◙", instance.quelPion(pion));
+        assertEquals("n", instance.quelPion(pion));
         
     }
 
@@ -65,21 +53,11 @@ public class PartieTest {
         int i = 0;
         int j = 0;
         Partie instance = new Partie();
-        instance.listePion.add(new Pion(true, new Point2D(i,j)));
+        instance.addListePion(new Pion(true, new Point2D(i,j)));
         assertEquals(true, instance.pionSurCase(i, j));
         assertEquals(false, instance.pionSurCase(i+1, j+2));
     }
 
-    /**
-     * Test of affichePlateau method, of class Partie.
-     */
-    @Test
-    public void testAffichePlateau() {
-        System.out.println("affichePlateau");
-        Partie instance = new Partie();
-        instance.affichePlateau();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
     
 }
