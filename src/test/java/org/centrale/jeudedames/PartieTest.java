@@ -65,11 +65,9 @@ public class PartieTest {
         int i = 0;
         int j = 0;
         Partie instance = new Partie();
-        boolean expResult = false;
-        boolean result = instance.pionSurCase(i, j);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.listePion.add(new Pion(true, new Point2D(i,j)));
+        assertEquals(true, instance.pionSurCase(i, j));
+        assertEquals(false, instance.pionSurCase(i+1, j+2));
     }
 
     /**
