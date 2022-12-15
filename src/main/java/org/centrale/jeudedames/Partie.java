@@ -28,7 +28,7 @@ public class Partie {
             for (int j=0;j<5;j++){
                 y = i;
                 x = j*2+((i+1)%2);
-                listePion.add(new Pion(true, new Point2D(x,y));
+                listePion.add(new Pion(true, new Point2D(x,y)));
             }
             
         }
@@ -36,7 +36,7 @@ public class Partie {
             for (int j=0;j<5;j++){
                 y = 9-i;
                 x = j*2+(i%2);
-                listePion.add(new Pion(true, new Point2D(x,y));
+                listePion.add(new Pion(true, new Point2D(x,y)));
             }
         }
     }
