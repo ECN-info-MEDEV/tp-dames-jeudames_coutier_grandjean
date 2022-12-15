@@ -19,6 +19,9 @@ public class Partie {
     public Partie(){
         tour = 0;
         listePion = new ArrayList<>();
+    }
+    
+    public void init(){
         int x;
         int y;
         for (int i=0;i<4;i++){
@@ -37,7 +40,36 @@ public class Partie {
             }
         }
     }
-        
+    
+    /**
+     * Renvoie la représentation du pion
+     * Blanc : pion = ○ ; dame = ☺
+     * Noir  : pion = ◙ ; dame = ☻
+     * @param pion
+     * @return 
+     */
+    public String quelPion(Pion pion){
+        if ( pion.isCouleur() ) { 
+        //Blanc
+            if ( pion.isDame() ){ 
+            //Dame
+                return "☺";
+            }else{ 
+            //Pion
+                return "○";
+            }
+        }else{ 
+        //Noir
+            if ( pion.isDame() ){ 
+            //Dame
+                return "☻";
+            }else{ 
+            //Pion
+                return "◙";
+            }
+        }
+    }
+    
     /**
      * Renvoie true si un pion/Dame se trouve sur la case et l'affiche, sinon renvoie false
      * @param i
@@ -45,27 +77,11 @@ public class Partie {
      * @return
      */
     public boolean pionSurCase(int i, int j){
+        String affPion;
         for (Pion pion : listePion){
             if ( pion.getPosition().equals(new Point2D(i,j)) ){
-                if ( pion.isCouleur() ) { 
-                //Blanc
-                    if ( pion.isDame() ){ 
-                    //Dame
-                        System.out.print("☺");
-                    }else{ 
-                    //Pion
-                        System.out.print("○");
-                    }
-                }else{ 
-                //Noir
-                    if ( pion.isDame() ){ 
-                    //Dame
-                        System.out.print("☻");
-                    }else{ 
-                    //Pion
-                        System.out.print("◙");
-                    }
-                }
+                affPion = quelPion(pion);
+                System.out.print(affPion);
                 return true;
             }
         }
