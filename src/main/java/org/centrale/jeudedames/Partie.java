@@ -19,11 +19,22 @@ public class Partie {
     public Partie(){
         tour = 0;
         listePion = new ArrayList<>();
-        for (int i=0;i<20;i++){
-            listePion.add(new Pion());
+        int x;
+        int y;
+        for (int i=0;i<4;i++){
+            for (int j=0;j<5;j++){
+                y = i;
+                x = j*2+((i+1)%2);
+                listePion.add(new Pion(true, new Point2D(x,y));
+            }
+            
         }
-        for (int i=0;i<20;i++){
-            listePion.add(new Pion());
+        for (int i=0;i<4;i++){
+            for (int j=0;j<5;j++){
+                y = 9-i;
+                x = j*2+(i%2);
+                listePion.add(new Pion(true, new Point2D(x,y));
+            }
         }
     }
         
