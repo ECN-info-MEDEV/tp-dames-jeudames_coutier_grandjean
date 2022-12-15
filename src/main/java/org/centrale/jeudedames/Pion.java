@@ -43,5 +43,10 @@ public class Pion {
     
         
     //méthodes
+    public void deplace(){
+        listeDeplacement =
+        //on regarde toutes les positions possibles et
+        
+    }
     
 }
