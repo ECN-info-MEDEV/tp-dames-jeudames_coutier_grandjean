@@ -54,12 +54,13 @@ public class Joueur {
      */
     public void afficheListePion(Partie partie){
         int i = 0; //compteur de pion
+        
         for (Pion p : partie.getListePion()){
+            i++;
             if (p.isCouleur()== this.isCouleur()){
                 System.out.print(i+" - Le pion en ");
                 p.getPosition().affiche();
                 System.out.println();
-                i++;
             }
         }
     }
