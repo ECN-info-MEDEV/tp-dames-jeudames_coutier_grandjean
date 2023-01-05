@@ -59,6 +59,7 @@ public class Joueur {
                 System.out.println(i+" - Le pion en ");
                 p.getPosition().affiche();
                 System.out.println();
+                i++;
             }
         }
     }
