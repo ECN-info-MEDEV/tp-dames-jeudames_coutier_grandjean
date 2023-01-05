@@ -102,7 +102,7 @@ public class Pion {
      * @param position : position de la case qu'on veut tester
      * @return true si la case est vide, sinon false
      */
-    private boolean caseVide(listePion pions, Point2D position){
+    public boolean caseVide(ArrayList<Pion> pions, Point2D position){
         for (Pion p : pions){
             if (position.equals(p.position)){
                 return false;
@@ -117,7 +117,7 @@ public class Pion {
      * @param position : case testée
      * @return true s'il y a un ennemi, false sinon
      */
-    private boolean caseEnnemi(listePion pions, Point2D position){
+    public boolean caseEnnemi(ArrayList<Pion> pions, Point2D position){
         for (Pion p : pions){
             if (position.equals(p.position) && p.couleur != this.couleur){
                 return true;
@@ -173,12 +173,12 @@ public class Pion {
      * @param nvcase : case sur laquelle sera le pion lorsque qu'il aura mangé
      * @param jeu : Partie concernée
      */
-    private void manger(Point2D nvcase, Partie jeu){
+    public void manger(Point2D nvcase, Partie jeu){
         //suppression du pion ennemi
         Point2D manger = new Point2D(abs(this.position.getX()-nvcase.getX())/2, abs(this.position.getY()-nvcase.getY())/2);
-        for (Pion p : jeu.listePion){
+        for (Pion p : jeu.getListePion()){
             if (manger.equals(p.position)){
-                jeu.listePion.remove(p);
+                jeu.getListePion().remove(p);
             }
         }
         // deplacer le pion
@@ -205,16 +205,16 @@ public class Pion {
                 choix=new Point2D(2*i + this.position.getX()-1, 2*j + this.position.getY()-1);
                 
                 // test si la case est vide
-                if (caseVide(jeu.listePion, choix)){
+                if (caseVide(jeu.getListePion(), choix)){
                     deplacementsSimples.add(choix);
                 }
                 
                 // sinon s'il y a un pion ennemi
                 // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
-                else if (caseEnnemi(jeu.listePion, choix)){
+                else if (caseEnnemi(jeu.getListePion(), choix)){
                     if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
                         Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
-                        if (caseVide(jeu.listePion,newpoint)){
+                        if (caseVide(jeu.getListePion(),newpoint)){
                             deplacementsManger.add(newpoint);
                         }
                     }
@@ -254,13 +254,10 @@ public class Pion {
         input.nextLine();
         
         if (!deplacementsManger.isEmpty()){
-           this.manger(deplacementsManger.get(i), jeu);
+           this.manger(deplacementsManger.get(reponse), jeu);
         }else{
-            this.setPosition(deplacementsSimples.get(i));
+            this.setPosition(deplacementsSimples.get(reponse));
         }
-        
-        // closes the scanner
-        input.close();
         
         return true; 
     }
