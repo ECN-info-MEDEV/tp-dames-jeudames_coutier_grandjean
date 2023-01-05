@@ -83,4 +83,74 @@ public class PionTest {
         
     }
     
+    /**
+     * Test méthode caseVide
+     */
+    @Test
+    public void testCaseVide() {
+        Partie partie = new Partie();
+        partie.init();
+        Pion p = new Pion(true);
+        
+        //test case vide
+        Point2D position = new Point2D();
+        boolean valeur = p.caseVide(partie.getListePion(), position);
+        assertTrue(valeur);
+        
+        // test case noire
+        position.setPosition(1, 0);
+        valeur = p.caseVide(partie.getListePion(), position);
+        assertFalse(valeur);
+        
+        // test case blanche
+        position.setPosition(0, 9);
+        valeur = p.caseVide(partie.getListePion(), position);
+        assertFalse(valeur);
+    }
+    
+    
+    /**
+     * Test méthode caseVide
+     */
+    @Test
+    public void testCaseEnnemi() {
+        Partie partie = new Partie();
+        partie.init();        
+
+        //BLANC
+        Pion p = new Pion(true);
+        
+        // test case vide
+        Point2D position = new Point2D();
+        boolean valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertFalse(valeur);
+        
+        // test ennemi
+        position.setPosition(1, 0);
+        valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertTrue(valeur);
+        
+        // test ami
+        position.setPosition(0, 9);
+        valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertFalse(valeur);
+
+        //NOIR
+        p.setCouleur(false);
+        
+        // test case vide
+        position.setPosition(0, 0);
+        valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertFalse(valeur);
+        
+        // test ennemi
+        position.setPosition(0, 9);
+        valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertTrue(valeur);
+        
+        // test ami
+        position.setPosition(1, 0);
+        valeur = p.caseEnnemi(partie.getListePion(), position);
+        assertFalse(valeur);
+    }
 }
