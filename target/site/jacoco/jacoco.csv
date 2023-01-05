@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+JeuDeDames,org.centrale.jeudedames,JeuDeDames,12,0,0,0,5,0,2,0,2,0
+JeuDeDames,org.centrale.jeudedames,Joueur,87,0,10,0,30,0,12,0,7,0
+JeuDeDames,org.centrale.jeudedames,Partie,132,66,16,10,26,20,14,9,6,4
+JeuDeDames,org.centrale.jeudedames,Point2D,13,97,2,4,5,27,3,12,1,11
+JeuDeDames,org.centrale.jeudedames,Pion,91,83,8,8,16,28,7,13,3,9

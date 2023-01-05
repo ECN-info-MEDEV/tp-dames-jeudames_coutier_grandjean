@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Partie.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JeuDeDames</a> &gt; <a href="index.source.html" class="el_package">org.centrale.jeudedames</a> &gt; <span class="el_source">Partie.java</span></div><h1>Partie.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package org.centrale.jeudedames;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author bryan
+ */
+public class Partie {
+    
+    //Attributs
+    private ArrayList&lt;Pion&gt; listePion;
+    private int tour;
+
+    //Getters et Setters
+    public ArrayList&lt;Pion&gt; getListePion() {
+<span class="nc" id="L21">        return listePion;</span>
+    }
+
+    public int getTour() {
+<span class="nc" id="L25">        return tour;</span>
+    }
+
+    public void setListePion(ArrayList&lt;Pion&gt; listePion) {
+<span class="nc" id="L29">        this.listePion = listePion;</span>
+<span class="nc" id="L30">    }</span>
+
+    public void setTour(int tour) {
+<span class="nc" id="L33">        this.tour = tour;</span>
+<span class="nc" id="L34">    }</span>
+    
+    public void addListePion(Pion pion){
+<span class="fc" id="L37">        this.listePion.add(pion);</span>
+<span class="fc" id="L38">    }</span>
+    
+    //Constructeur
+<span class="fc" id="L41">    public Partie(){</span>
+<span class="fc" id="L42">        tour = 0;</span>
+<span class="fc" id="L43">        listePion = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">    }</span>
+    
+    /**
+     * Initialisation du plateau en y plaçant les pions
+     */
+    public void init(){
+        int x;
+        int y;
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        for (int i=0;i&lt;4;i++){</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for (int j=0;j&lt;5;j++){</span>
+<span class="nc" id="L54">                y = i;</span>
+<span class="nc" id="L55">                x = j*2+((i+1)%2);</span>
+<span class="nc" id="L56">                listePion.add(new Pion(false, new Point2D(x,y)));</span>
+            }
+            
+        }
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        for (int i=0;i&lt;4;i++){</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            for (int j=0;j&lt;5;j++){</span>
+<span class="nc" id="L62">                y = 9-i;</span>
+<span class="nc" id="L63">                x = j*2+(i%2);</span>
+<span class="nc" id="L64">                listePion.add(new Pion(true, new Point2D(x,y)));</span>
+            }
+        }
+<span class="nc" id="L67">    }</span>
+    
+    /**
+     * Renvoie la représentation du pion
+     * Blanc : pion = b ; dame = B
+     * Noir  : pion = n ; dame = N
+     * @param pion
+     * @return 
+     */
+    public String quelPion(Pion pion){
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if ( pion.isCouleur() ) { </span>
+        //Blanc
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            if ( pion.isDame() ){ </span>
+            //Dame
+<span class="fc" id="L81">                return &quot;B&quot;;</span>
+            }else{ 
+            //Pion
+<span class="fc" id="L84">                return &quot;b&quot;;</span>
+            }
+        }else{ 
+        //Noir
+<span class="fc bfc" id="L88" title="All 2 branches covered.">            if ( pion.isDame() ){ </span>
+            //Dame
+<span class="fc" id="L90">                return &quot;N&quot;;</span>
+            }else{ 
+            //Pion
+<span class="fc" id="L93">                return &quot;n&quot;;</span>
+            }
+        }
+    }
+    
+    /**
+     * Renvoie true si un pion/Dame se trouve sur la case et l'affiche, sinon renvoie false
+     * @param i
+     * @param j
+     * @return
+     */
+    public boolean pionSurCase(int i, int j){
+        String affPion;
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (Pion pion : listePion){</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if ( pion.getPosition().equals(new Point2D(i,j)) ){</span>
+<span class="fc" id="L108">                affPion = quelPion(pion);</span>
+<span class="fc" id="L109">                System.out.print(affPion);</span>
+<span class="fc" id="L110">                return true;</span>
+            }
+<span class="fc" id="L112">        }</span>
+        //Si aucun pion se trouve sur la case
+<span class="fc" id="L114">        return false;</span>
+    }
+    
+    /**
+     * Affiche le plateau de taille 10x10
+     * Blanc : pion = b ; dame = B
+     * Noir  : pion = n ; dame = N
+     * Case vide = •
+     */
+    public void affichePlateau(){
+        //Plateau de 10x10
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        for (int i = 0 ; i&lt;10 ; i++){</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            for (int j = 0 ; j&lt;10 ; j++){</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                if ( (i+j)%2 == 0){ </span>
+                //Les pions ne sont que sur les cases noires
+<span class="nc" id="L129">                    System.out.print(&quot;+&quot;);</span>
+                }else{
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                    if (!pionSurCase(j,i)){</span>
+<span class="nc" id="L132">                        System.out.print(&quot;-&quot;);</span>
+                    }
+                }
+<span class="nc" id="L135">                System.out.print(&quot; &quot;);</span>
+            }
+            //Changement de ligne
+<span class="nc" id="L138">            System.out.println(&quot;&quot;);</span>
+        }
+<span class="nc" id="L140">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

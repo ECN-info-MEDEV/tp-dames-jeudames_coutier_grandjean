@@ -1,0 +1,5 @@
+org\centrale\jeudedames\JeuDeDames.class
+org\centrale\jeudedames\Partie.class
+org\centrale\jeudedames\Pion.class
+org\centrale\jeudedames\Joueur.class
+org\centrale\jeudedames\Point2D.class
