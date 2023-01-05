@@ -12,6 +12,8 @@ package org.centrale.jeudedames;
 public class JeuDeDames {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Partie partie = new Partie();
+        partie.init();
+        partie.affichePlateau();
     }
 }
