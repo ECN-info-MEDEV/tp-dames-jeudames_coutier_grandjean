@@ -4,7 +4,9 @@
  */
 package org.centrale.jeudedames;
 
+import static java.lang.Math.abs;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -77,7 +79,7 @@ public class Pion {
     }
 
     public void setPosition(Point2D position) {
-        this.position = position;
+        this.position = new Point2D(position);
     }
     
         
@@ -93,16 +95,40 @@ public class Pion {
             System.out.println(" est promu en dame.");
         }
     }
+
+ /**
+     * Méthode permettant de regarder si une case est occupée
+     * @param pions : liste des pions du jeu
+     * @param position : position de la case qu'on veut tester
+     * @return true si la case est vide, sinon false
+     */
+    private boolean caseVide(listePion pions, Point2D position){
+        for (Pion p : pions){
+            if (position.equals(p.position)){
+                return false;
+            }
+        }
+        return true;
+    }
     
     /**
-     * Méthode permettant de déplacer un pion.
-     * S'il existe un déplacement permettant de manger des pions, alors on est obligé de 
-     * manger des pions. On choisit alors le déplacement permettant de manger le plus de 
-     * pions (en nombre et pas en valeur (dame ou pas)).
-     * Sinon, le joueur peut choisir son déplacement parmi tous ceux qui sont possibles
+     * Méthode permettant de savoir si une case est occupée par un pion adverse
+     * @param pions : liste des pions du jeu
+     * @param position : case testée
+     * @return true s'il y a un ennemi, false sinon
      */
-    public void deplace(){
-        ArrayList<Point2D> listeDeplacement = new ArrayList<>() ;
+    private boolean caseEnnemi(listePion pions, Point2D position){
+        for (Pion p : pions){
+            if (position.equals(p.position) && p.couleur != this.couleur){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /*
+    private ArrayList<Point2D> deplaceManger (Partie jeu, Joueur joueur){
+        ArrayList<Point2D> possibilites = new ArrayList<>();
         
         //on regarde toutes les positions possibles et on les stocke
         //on teste les quatre déplacements possibles en diagonales
@@ -110,34 +136,134 @@ public class Pion {
         for (int i=0; i<=1; i++){
             for (int j=0; j<=1; j++){
                 choix=new Point2D(2*i + this.position.getX()-1, 2*j + this.position.getY()-1);
-                listeDeplacement.add(choix);
+                
+                // on regarde s'il y a un pion ennemi sur une diagonale
+                // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
+                if (caseEnnemi(jeu.listePion, choix, joueur.couleur)){
+                    if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
+                        Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
+                        if (caseVide(jeu.listePion,newpoint)){
+                            possibilites.add(choix);
+                        }
+                    }
+                }
+                
             }   
         }
-        /*
-        for (Pion pion : listePion){
-            if 
+        return possibilites;
+    }
+    */
+    
+    /*
+    private void demandeManger(ArrayList<Point2D> possibilites, Scanner input){
+        int i = 0;
+        System.out.println("Vous pouvez encore manger des pions adverses, votre pion serait alors en :");
+        for (Point2D p : possibilites){
+            System.out.println(" - " + i + " ");
+            p.affiche();
+            System.out.println();
+            i++;
         }
-        */
-        
+        int reponse = input.nextInt();
+        input.nextLine();
+    }
+    */
+    /**
+     * Méthode permettant de manger un pion
+     * @param nvcase : case sur laquelle sera le pion lorsque qu'il aura mangé
+     * @param jeu : Partie concernée
+     */
+    private void manger(Point2D nvcase, Partie jeu){
+        //suppression du pion ennemi
+        Point2D manger = new Point2D(abs(this.position.getX()-nvcase.getX())/2, abs(this.position.getY()-nvcase.getY())/2);
+        for (Pion p : jeu.listePion){
+            if (manger.equals(p.position)){
+                jeu.listePion.remove(p);
+            }
+        }
+        // deplacer le pion
+        this.setPosition(nvcase);
     }
     
     /**
-     * 
-     * @param place
-     * @param listeCapturePossible
-     * @param listecapture
-     * @return 
+     * Méthode permettant de déplacer un pion selon les choix du joueur, elle mange si besoin les pions
+     * @param jeu
+     * @param joueur
+     * @return true si on peut déplacer le pion, false sinon
      */
-    public ArrayList<ArrayList<Point2D>> capture(Point2D place, ArrayList<Point2D> listeCapturePossible, ArrayList<Point2D> listecapture){
+    public boolean deplace(Partie jeu, Joueur joueur){
+        Scanner input = new Scanner(System.in);
+
+        ArrayList<Point2D> deplacementsSimples = new ArrayList<>() ;
+        ArrayList<Point2D> deplacementsManger = new ArrayList<>();
         
-        if (!listeCapturePossible.isEmpty()){
-            for (Point2D possibilite : listeCapturePossible){
-                int x = 2*place.getX()-possibilite.getX();
-                int y = 2*place.getY()-possibilite.getY();
-                Point2D nvPosition = new Point2D(x,y);
+        //on regarde toutes les positions possibles et on les stocke
+        //on teste les quatre déplacements possibles en diagonales
+        Point2D choix;
+        for (int i=0; i<=1; i++){
+            for (int j=0; j<=1; j++){
+                choix=new Point2D(2*i + this.position.getX()-1, 2*j + this.position.getY()-1);
+                
+                // test si la case est vide
+                if (caseVide(jeu.listePion, choix)){
+                    deplacementsSimples.add(choix);
+                }
+                
+                // sinon s'il y a un pion ennemi
+                // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
+                else if (caseEnnemi(jeu.listePion, choix)){
+                    if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
+                        Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
+                        if (caseVide(jeu.listePion,newpoint)){
+                            deplacementsManger.add(newpoint);
+                        }
+                    }
+                }
+                
+            }   
+        }
+        
+        int i = 0;
+        
+        // vérifie qu'on peut déplacer ce pion
+        if (deplacementsSimples.isEmpty() && deplacementsManger.isEmpty()){
+            System.out.println("Vous ne pouvez pas déplacer ce pion");
+            return false;
+            
+        } else if (! deplacementsManger.isEmpty()){
+            System.out.println("Vous pouvez manger des pions adverses, votre pion serait alors en :");
+            for (Point2D p : deplacementsManger){
+                System.out.println(" - " + i + " ");
+                p.affiche();
+                System.out.println();
+                i++;
+            }
+            
+        } else {
+            System.out.println("Vous ne pouvez pas manger avec ce pion");
+            System.out.println("Vous pouvez faire des déplacements simples, votre pion serait alors en :");
+            for (Point2D p : deplacementsSimples){
+                System.out.println(" - " + i + " ");
+                p.affiche();
+                System.out.println();
+                i++;
             }
         }
-        ArrayList<ArrayList<Point2D>> nvListeCapture = new ArrayList<ArrayList<Point2D>>() ;
-        return nvListeCapture;
+        
+        int reponse = input.nextInt();
+        input.nextLine();
+        
+        if (!deplacementsManger.isEmpty()){
+           this.manger(deplacementsManger.get(i), jeu);
+        }else{
+            this.setPosition(deplacementsSimples.get(i));
+        }
+        
+        // closes the scanner
+        input.close();
+        
+        return true; 
     }
+    
 }
+
