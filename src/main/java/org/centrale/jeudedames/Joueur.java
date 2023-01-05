@@ -56,11 +56,11 @@ public class Joueur {
         int i = 0; //compteur de pion
         
         for (Pion p : partie.getListePion()){
-            i++;
             if (p.isCouleur()== this.isCouleur()){
                 System.out.print(i+" - Le pion en ");
                 p.getPosition().affiche();
                 System.out.println();
+                i++;
             }
         }
     }
@@ -71,7 +71,8 @@ public class Joueur {
      */
     public void jouer(Scanner scan, Partie partie){
         boolean valide = false;
-        
+        int i=0;//compteur
+        int j=0;//compteur du nombre de pion du joueur
         int choix;
         
         System.out.println("C'est au tour de "+ this.nom + ".");
@@ -84,9 +85,17 @@ public class Joueur {
                 if (choix >= partie.getListePion().size() || choix < 0){
                     System.out.println("Oups, cela ne correspond à aucun pion ! Réessaie");
                 }else{
-                    if (partie.getListePion().get(choix).deplace(partie, this)){
-                       valide = true; 
+                    for (i=0;i<partie.getListePion().size();i++){
+                        if (partie.getListePion().get(i).isCouleur()== this.isCouleur()){ 
+                            if (j==choix){
+                                if (partie.getListePion().get(i).deplace(partie, this)){
+                                    valide = true; 
+                                }
+                            }
+                            j++;
+                        }
                     }
+                    
                 }
             }catch (InputMismatchException ex){
                 System.out.println("Oups, cela ne correspond à aucun pion ! Réessaie");        
