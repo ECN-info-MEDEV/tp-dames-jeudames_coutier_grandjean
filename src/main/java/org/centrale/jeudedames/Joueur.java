@@ -56,7 +56,7 @@ public class Joueur {
         int i = 0; //compteur de pion
         for (Pion p : partie.getListePion()){
             if (p.isCouleur()== this.isCouleur()){
-                System.out.println(i+" - Le pion en ");
+                System.out.print(i+" - Le pion en ");
                 p.getPosition().affiche();
                 System.out.println();
                 i++;
