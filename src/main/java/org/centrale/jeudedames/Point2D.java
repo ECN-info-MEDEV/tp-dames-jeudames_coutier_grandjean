@@ -120,8 +120,8 @@ public class Point2D {
      * @return distance entre les deux points
      */
     public float distance(Point2D p) {
-        float X = p.x-x;
-        float Y = p.y-y;
+        int X = p.x-x;
+        int Y = p.y-y;
         return (float) Math.hypot(X,Y);
     }
 }
