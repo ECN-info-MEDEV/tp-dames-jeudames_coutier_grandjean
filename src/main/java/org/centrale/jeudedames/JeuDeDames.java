@@ -19,12 +19,14 @@ public class JeuDeDames {
         partie.init();
         partie.affichePlateau();
         Joueur joueur1 = new Joueur("joueurBlanc", true);
-        Joueur joueur2 = new Joueur("joueurNoir", true);
+        Joueur joueur2 = new Joueur("joueurNoir", false);
         
         while (!partie.finPartie()){
             joueur1.jouer(scan, partie);
+            partie.affichePlateau();
             if (!partie.finPartie()){
                 joueur2.jouer(scan, partie);
+                partie.affichePlateau();
             }
         }
     }

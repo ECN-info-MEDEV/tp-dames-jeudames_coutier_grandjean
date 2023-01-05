@@ -82,9 +82,11 @@ public class Joueur {
         while (!valide){
             try{
                 choix = scan.nextInt();
+                scan.nextLine();
                 if (choix >= partie.getListePion().size() || choix < 0){
                     System.out.println("Oups, cela ne correspond à aucun pion ! Réessaie");
                 }else{
+                    j=0;
                     for (i=0;i<partie.getListePion().size();i++){
                         if (partie.getListePion().get(i).isCouleur()== this.isCouleur()){ 
                             if (j==choix){

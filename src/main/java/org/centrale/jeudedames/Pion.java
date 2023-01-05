@@ -126,48 +126,7 @@ public class Pion {
         return false;
     }
     
-    /*
-    private ArrayList<Point2D> deplaceManger (Partie jeu, Joueur joueur){
-        ArrayList<Point2D> possibilites = new ArrayList<>();
-        
-        //on regarde toutes les positions possibles et on les stocke
-        //on teste les quatre déplacements possibles en diagonales
-        Point2D choix;
-        for (int i=0; i<=1; i++){
-            for (int j=0; j<=1; j++){
-                choix=new Point2D(2*i + this.position.getX()-1, 2*j + this.position.getY()-1);
-                
-                // on regarde s'il y a un pion ennemi sur une diagonale
-                // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
-                if (caseEnnemi(jeu.listePion, choix, joueur.couleur)){
-                    if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
-                        Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
-                        if (caseVide(jeu.listePion,newpoint)){
-                            possibilites.add(choix);
-                        }
-                    }
-                }
-                
-            }   
-        }
-        return possibilites;
-    }
-    */
-    
-    /*
-    private void demandeManger(ArrayList<Point2D> possibilites, Scanner input){
-        int i = 0;
-        System.out.println("Vous pouvez encore manger des pions adverses, votre pion serait alors en :");
-        for (Point2D p : possibilites){
-            System.out.println(" - " + i + " ");
-            p.affiche();
-            System.out.println();
-            i++;
-        }
-        int reponse = input.nextInt();
-        input.nextLine();
-    }
-    */
+ 
     /**
      * Méthode permettant de manger un pion
      * @param nvcase : case sur laquelle sera le pion lorsque qu'il aura mangé
@@ -203,22 +162,24 @@ public class Pion {
         for (int i=0; i<=1; i++){
             for (int j=0; j<=1; j++){
                 choix=new Point2D(2*i + this.position.getX()-1, 2*j + this.position.getY()-1);
-                
-                // test si la case est vide
-                if (caseVide(jeu.getListePion(), choix)){
-                    deplacementsSimples.add(choix);
-                }
-                
-                // sinon s'il y a un pion ennemi
-                // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
-                else if (caseEnnemi(jeu.getListePion(), choix)){
-                    if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
-                        Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
-                        if (caseVide(jeu.getListePion(),newpoint)){
-                            deplacementsManger.add(newpoint);
-                        }
+                if (2*i + this.position.getX()-1>=0 && 2*i + this.position.getX()-1<=9 && 2*j + this.position.getY()-1>=0 && 2*j + this.position.getY()-1<=9){
+                    // test si la case est vide
+                    if (caseVide(jeu.getListePion(), choix)){
+                        deplacementsSimples.add(choix);
                     }
+
+                    // sinon s'il y a un pion ennemi
+                    // on doit vérifier que la case suivante en diagonale existe et qu'elle est vide
+                    else if (caseEnnemi(jeu.getListePion(), choix)){
+                        if (choix.getX()> 0 && choix.getX()<9 && choix.getY()>0 && choix.getY()<9){
+                            Point2D  newpoint = new Point2D(abs(this.position.getX()- 2*choix.getX()), abs(this.position.getY()- 2*choix.getY()));
+                            if (caseVide(jeu.getListePion(),newpoint)){
+                                deplacementsManger.add(newpoint);
+                            }
+                        }
+                    } 
                 }
+                
                 
             }   
         }
@@ -233,7 +194,7 @@ public class Pion {
         } else if (! deplacementsManger.isEmpty()){
             System.out.println("Vous pouvez manger des pions adverses, votre pion serait alors en :");
             for (Point2D p : deplacementsManger){
-                System.out.println(" - " + i + " ");
+                System.out.print(" - " + i + " ");
                 p.affiche();
                 System.out.println();
                 i++;
@@ -243,7 +204,7 @@ public class Pion {
             System.out.println("Vous ne pouvez pas manger avec ce pion");
             System.out.println("Vous pouvez faire des déplacements simples, votre pion serait alors en :");
             for (Point2D p : deplacementsSimples){
-                System.out.println(" - " + i + " ");
+                System.out.print(" - " + i + " ");
                 p.affiche();
                 System.out.println();
                 i++;
