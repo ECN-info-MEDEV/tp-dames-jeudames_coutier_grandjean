@@ -5,6 +5,8 @@
 
 package org.centrale.jeudedames;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Manon Coutier
@@ -12,8 +14,18 @@ package org.centrale.jeudedames;
 public class JeuDeDames {
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         Partie partie = new Partie();
         partie.init();
         partie.affichePlateau();
+        Joueur joueur1 = new Joueur("joueurBlanc", true);
+        Joueur joueur2 = new Joueur("joueurNoir", true);
+        
+        while (!partie.finPartie()){
+            joueur1.jouer(scan, partie);
+            if (!partie.finPartie()){
+                joueur2.jouer(scan, partie);
+            }
+        }
     }
 }
