@@ -139,4 +139,24 @@ public class Partie {
         }
     }
     
+    /**
+     * Permet de savoir si la partie est finie
+     * @return true si la partie est finie, false sinon
+     */
+    public boolean finPartie(){
+        boolean blanc = false;
+        boolean noir = false;
+        
+        for (Pion p : this.listePion){
+            if (p.isCouleur()){
+                blanc = true;
+            }
+            else{
+                noir = true;
+            }
+        }
+        
+        return noir == false || blanc == false;
+    }
+    
 }

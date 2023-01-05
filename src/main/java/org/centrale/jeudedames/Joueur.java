@@ -82,9 +82,9 @@ public class Joueur {
                 if (choix >= partie.getListePion().size() || choix < 0){
                     System.out.println("Oups, cela ne correspond à aucun pion ! Réessaie");
                 }else{
-                    /**if (partie.getListePion().get(choix).deplace(partie, this)){
+                    if (partie.getListePion().get(choix).deplace(partie, this)){
                        valide = true; 
-                    }**/
+                    }
                 }
             }catch (InputMismatchException ex){
                 System.out.println("Oups, cela ne correspond à aucun pion ! Réessaie");        

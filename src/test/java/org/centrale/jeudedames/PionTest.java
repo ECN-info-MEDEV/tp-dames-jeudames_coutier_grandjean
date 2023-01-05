@@ -153,4 +153,23 @@ public class PionTest {
         valeur = p.caseEnnemi(partie.getListePion(), position);
         assertFalse(valeur);
     }
+    
+    /**
+     * Test méthode manger == infaissable car void
+     */
+    @Test
+    public void manger() {
+        /*
+        Partie partie = new Partie();
+        partie.init();
+        
+        // blanc mange noir
+        Pion pion = new Pion(false, new Point2D(2, 5));
+        partie.addListePion(pion);
+        
+        manger(Point2D nvcase, Partie jeu)
+        
+        // noir mange blanc
+        */
+    }
 }
