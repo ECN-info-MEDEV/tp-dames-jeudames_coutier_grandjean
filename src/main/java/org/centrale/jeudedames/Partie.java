@@ -13,14 +13,39 @@ import java.util.ArrayList;
 public class Partie {
     
     //Attributs
-    public ArrayList<Pion> listePion;
+    private ArrayList<Pion> listePion;
     private int tour;
+
+    //Getters et Setters
+    public ArrayList<Pion> getListePion() {
+        return listePion;
+    }
+
+    public int getTour() {
+        return tour;
+    }
+
+    public void setListePion(ArrayList<Pion> listePion) {
+        this.listePion = listePion;
+    }
+
+    public void setTour(int tour) {
+        this.tour = tour;
+    }
     
+    public void addListePion(Pion pion){
+        this.listePion.add(pion);
+    }
+    
+    //Constructeur
     public Partie(){
         tour = 0;
         listePion = new ArrayList<>();
     }
     
+    /**
+     * Initialisation du plateau en y plaçant les pions
+     */
     public void init(){
         int x;
         int y;
@@ -28,7 +53,7 @@ public class Partie {
             for (int j=0;j<5;j++){
                 y = i;
                 x = j*2+((i+1)%2);
-                listePion.add(new Pion(true, new Point2D(x,y)));
+                listePion.add(new Pion(false, new Point2D(x,y)));
             }
             
         }
@@ -43,8 +68,8 @@ public class Partie {
     
     /**
      * Renvoie la représentation du pion
-     * Blanc : pion = ○ ; dame = ☺
-     * Noir  : pion = ◙ ; dame = ☻
+     * Blanc : pion = b ; dame = B
+     * Noir  : pion = n ; dame = N
      * @param pion
      * @return 
      */
@@ -53,19 +78,19 @@ public class Partie {
         //Blanc
             if ( pion.isDame() ){ 
             //Dame
-                return "☺";
+                return "B";
             }else{ 
             //Pion
-                return "○";
+                return "b";
             }
         }else{ 
         //Noir
             if ( pion.isDame() ){ 
             //Dame
-                return "☻";
+                return "N";
             }else{ 
             //Pion
-                return "◙";
+                return "n";
             }
         }
     }
@@ -91,23 +116,23 @@ public class Partie {
     
     /**
      * Affiche le plateau de taille 10x10
-     * Blanc : pion = ○ ; dame = ☺
-     * Noir  : pion = ◙ ; dame = ☻
+     * Blanc : pion = b ; dame = B
+     * Noir  : pion = n ; dame = N
      * Case vide = •
      */
     public void affichePlateau(){
         //Plateau de 10x10
-        // TODO voir si on choisit le premier indice à 1 ou à 0
         for (int i = 0 ; i<10 ; i++){
             for (int j = 0 ; j<10 ; j++){
                 if ( (i+j)%2 == 0){ 
                 //Les pions ne sont que sur les cases noires
-                    System.out.print("•");
+                    System.out.print("+");
                 }else{
-                    if (!pionSurCase(i,j)){
-                        System.out.print("•");
+                    if (!pionSurCase(j,i)){
+                        System.out.print("-");
                     }
                 }
+                System.out.print(" ");
             }
             //Changement de ligne
             System.out.println("");
