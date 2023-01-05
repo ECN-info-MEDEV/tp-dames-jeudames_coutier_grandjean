@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Point2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JeuDeDames</a> &gt; <a href="index.source.html" class="el_package">org.centrale.jeudedames</a> &gt; <span class="el_source">Point2D.java</span></div><h1>Point2D.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package org.centrale.jeudedames;
+
+/**
+ * Classe assurant la gestion des positions 2D
+ * @author Manon Coutier
+ */
+public class Point2D {
+    //ATTRIBUTS
+    /**
+     * x : abscisse du point
+     */
+    private int x;
+    /**
+     * y : ordonnée du point
+     */
+    private int y;
+
+    //CONSTRUCTEURS
+    //Constructeur par défaut
+    /**
+     * Crée un point 2D par défaut.
+     */
+<span class="fc" id="L27">    public Point2D() {</span>
+<span class="fc" id="L28">        this.x = 0;</span>
+<span class="fc" id="L29">        this.y = 0;</span>
+<span class="fc" id="L30">    }</span>
+
+    //Constructeur de recopie
+    /**
+     * Crée un point 2D à partir d'un modèle.
+     * @param p Point2D modèle
+     */
+<span class="nc" id="L37">    public Point2D(Point2D p) {</span>
+<span class="nc" id="L38">        this.x = p.x;</span>
+<span class="nc" id="L39">        this.y = p.y;</span>
+<span class="nc" id="L40">    }</span>
+    
+    //Constructeur paramétré entièrement
+    /**
+     * Crée un point 2D entièrement paramétré.
+     * @param x abscisse du point
+     * @param y ordonnée du point
+     */
+<span class="fc" id="L48">    public Point2D(int x, int y) {</span>
+<span class="fc" id="L49">        this.x = x;</span>
+<span class="fc" id="L50">        this.y = y;</span>
+<span class="fc" id="L51">    }</span>
+
+
+    //SETTERS ET GETTERS
+    //Getters
+    
+    public int getX() {
+<span class="fc" id="L58">        return x;</span>
+    }
+
+    public int getY() {
+<span class="fc" id="L62">        return y;</span>
+    }
+
+    //Setters
+    
+    public void setX(int abs) {
+<span class="fc" id="L68">        x = abs;</span>
+<span class="fc" id="L69">    }</span>
+
+    public void setY(int ord) {
+<span class="fc" id="L72">        y = ord;</span>
+<span class="fc" id="L73">    }</span>
+
+    
+    //AUTRES MÉTHODES
+    /**
+     * Compare deux Point2D.
+     * @param pos position comparée.
+     * @return booléen vrai si les deux points sont à la même position.
+     */
+    public boolean equals(Point2D pos){
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (pos == null){</span>
+<span class="nc" id="L84">            return false;</span>
+        }else{
+<span class="pc bpc" id="L86" title="1 of 4 branches missed.">            return ((x == pos.x) &amp;&amp; (y == pos.y));</span>
+        }
+    }
+    
+    /**
+     * Affiche les coordonnées d'un point.
+     */
+    public void affiche() {
+<span class="fc" id="L94">        System.out.print(&quot;[&quot; + this.x + &quot;;&quot; + this.y + &quot;]&quot;);</span>
+<span class="fc" id="L95">    }</span>
+
+    /**
+     * Modifie les coordonnées d'un point.
+     * @param abs nouvelle abscisse
+     * @param ord nouvelle ordonnée
+     */
+    public void setPosition(int abs, int ord) {
+<span class="fc" id="L103">        this.x = abs;</span>
+<span class="fc" id="L104">        this.y = ord;</span>
+<span class="fc" id="L105">    }</span>
+
+    /**
+     * Translate un point.
+     * @param dx translation horizontale
+     * @param dy translation verticale
+     */
+    public void translate(int dx, int dy) {
+<span class="fc" id="L113">        this.x += dx;</span>
+<span class="fc" id="L114">        this.y += dy;</span>
+<span class="fc" id="L115">    }</span>
+
+    /**
+     * Calcule la distance entre le point considéré et un point p
+     * @param p point
+     * @return distance entre les deux points
+     */
+    public float distance(Point2D p) {
+<span class="fc" id="L123">        float X = p.x-x;</span>
+<span class="fc" id="L124">        float Y = p.y-y;</span>
+<span class="fc" id="L125">        return (float) Math.hypot(X,Y);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
