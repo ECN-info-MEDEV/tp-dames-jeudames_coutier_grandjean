@@ -86,7 +86,7 @@ public class Pion {
      * vérifie qu'un pion peut être ou non promu et le promeut si c'est possible
      */
     public void promotion(){
-        if (((this.couleur) && (this.getPosition().getY()==0)) || ((this.couleur) && (this.getPosition().getY()==9))){
+        if (((this.couleur) && (this.getPosition().getY()==0)) || ((!this.couleur) && (this.getPosition().getY()==9))){
             this.setDame(true);
             System.out.print("Le pion en position ");
             this.getPosition().affiche();
